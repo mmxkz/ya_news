@@ -14,6 +14,9 @@ services:
       REDIS_HOST: "redis://redis:6379/"
     ports:
       - "3000:3000"
+    volumes:
+      - .:/ya_news
+
   postgres:
     image: postgres
     container_name: yanews_postgres
