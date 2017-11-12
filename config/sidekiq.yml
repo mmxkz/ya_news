@@ -1,0 +1,9 @@
+:verbose: true
+:concurrency: 1
+:pidfile: tmp/pids/sidekiq.pid
+:logfile: log/sidekiq.log
+:queues:
+  - [yandex_news, 1]
+  - [default, 1]
+:limits:
+  yandex_news: 1

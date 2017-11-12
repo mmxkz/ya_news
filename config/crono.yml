@@ -1,0 +1,2 @@
+;piddir: tmp/pids/crono.pid
+:logfile: log/crono.log
