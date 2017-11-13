@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   root "articles#actual"
 
-  namespace "admin" do
-    root "articles#new"
-  end
+  get "/admin" => "articles#new"
+  post "/admin", to: "articles#create"
+  patch "/admin", to: "articles#create"
 end

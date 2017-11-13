@@ -1,0 +1,12 @@
+= form_for @article, url: admin_path, action: 'post' do |f|
+  =f.label :title
+  =f.text_field :title
+
+  =f.label :annotation
+  =f.text_area :annotation
+
+  =f.label :published_to
+  =f.datetime_select :published_to, selected: Date.today, min: 5.days.ago, max: 1.year.from_now
+
+  =f.submit
+
