@@ -4,6 +4,8 @@
 :logfile: log/sidekiq.log
 :queues:
   - [yandex_news, 1]
+  - [broadcast_news, 1]
   - [default, 1]
 :limits:
   yandex_news: 1
+  broadcast_news: 1

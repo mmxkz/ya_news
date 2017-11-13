@@ -38,9 +38,12 @@ gem 'sinatra', require: nil
 
 # Simple, efficient background job processing for Ruby.
 gem "sidekiq"
+gem 'redis', '~> 3.3'
 
 #Ruby scheduler
 gem "crono"
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

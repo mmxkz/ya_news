@@ -1,10 +1,8 @@
+
 development:
-  adapter: async
+  adapter: redis
+  url: <%= ENV['REDIS_HOST_CABLE'] %>
+  channel_prefix: docker_ya_news
 
 test:
   adapter: async
-
-production:
-  adapter: redis
-  url: redis://localhost:6379/1
-  channel_prefix: ya_news_production

@@ -1,7 +1,8 @@
 class ArticlesController < ApplicationController
-  def index
+  def actual
+    @article = Article.actual
   end
 
-  def update
+  def create
   end
 end
