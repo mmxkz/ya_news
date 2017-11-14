@@ -1,12 +1,21 @@
-= form_for @article, url: admin_path, action: 'post' do |f|
-  =f.label :title
-  =f.text_field :title
+= form_for @article, url: admin_path, action: 'post', html: {class: "ui form"}  do |f|
+  - if @article.errors.any?
+    .ui.tertiary.inverted.red.segment
+      .ui.bulleted.list
+        - @article.errors.full_messages.each do |msg|
+          .item= msg
+  .field
+    =f.label :title
+    =f.text_field :title
+  .field
+    =f.label :annotation
+    =f.text_area :annotation
+  .field
+    =f.label :published_to
+    .fields
+      =f.datetime_select :published_to
+    %label
+      ="Use timezone: #{Time.zone.name}"
 
-  =f.label :annotation
-  =f.text_area :annotation
-
-  =f.label :published_to
-  =f.datetime_select :published_to
-
-  =f.submit
+  =f.submit 'Save', class: 'ui button'
 

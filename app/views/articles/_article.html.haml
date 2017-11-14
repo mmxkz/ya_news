@@ -1,7 +1,10 @@
 #Article
-  %h3
-    = article.title
-  %p
-    = article.annotation
-  %p
-    = article.published_at
+  .ui.items
+    .item
+      .content
+        %p.header
+          = article.title
+        .description
+          = article.annotation
+        .extra
+          = (article.published_at || article.created_at).strftime("%v %H:%M (%Z)")

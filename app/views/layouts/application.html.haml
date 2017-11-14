@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %title Gudex
+    = javascript_include_tag "application", 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag "application", media: 'all', 'data-turbolinks-track': 'reload'
+    = csrf_meta_tags
+  %body
+    .ui.borderless.main.menu
+      .ui.container
+        %a.ui.item{href: root_path}
+          Главная страница
+        %a.ui.item{href: admin_path}
+          Создать новость
+        %a.ui.item{href: sidekiq_web_path}
+          Sidekiq
+        %a.ui.item{href: crono_web_path}
+          Crono
+    .ui.stackable.page.grid
+      .ui.wide.column
+        .ui.segment
+          = yield
