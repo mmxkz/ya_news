@@ -5,6 +5,6 @@
         %p.header
           = article.title
         .description
-          = article.annotation
+          = article.annotation.html_safe
         .extra
           = (article.published_at || article.created_at).strftime("%v %H:%M (%Z)")
