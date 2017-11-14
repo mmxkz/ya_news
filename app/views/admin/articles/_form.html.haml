@@ -1,4 +1,4 @@
-= form_for @article, html: {class: "ui form"}  do |f|
+= form_for @article, url: admin_path, html: {class: "ui form"}  do |f|
   - if @article.errors.any?
     .ui.tertiary.inverted.red.segment
       .ui.bulleted.list

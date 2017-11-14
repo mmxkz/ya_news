@@ -1,12 +1,12 @@
 class Article < ApplicationRecord
+  include Broadcast
+
   scope :from_yandex, -> { where published_to: nil }
-  scope :from_author, -> { where.not(published_to: nil) }
+  scope :with_actual_published_to, -> { where("published_to > ?", Time.zone.now) }
 
   validates :title, presence: true
   validates :annotation, presence: true
-  validate :check_published_to, on: :create, if: -> { self.published_to.present? }
-
-  after_create_commit :broadcast, if: -> { self == Article.actual }
+  validate :check_published_to, on: [:create, :update], if: -> { self.published_to.present? }
 
   def check_published_to
     if published_to < DateTime.now
@@ -14,23 +14,17 @@ class Article < ApplicationRecord
     end
   end
 
-  def broadcast
-    NewsBroadcastJob.perform_later(self)
-    NewsBroadcastJob.set(wait_until: self.published_to + 1.seconds).perform_later if published_to
-  end
-
   class << self
     def actual
-      Article.from_author.where("published_to > ?", Time.now).last ||
-      Article.from_yandex.last
+      actual_from_author || actual_from_yandex
     end
 
-    def last_from_yandex
+    def actual_from_author
+      with_actual_published_to.last
+    end
+
+    def actual_from_yandex
       from_yandex.last
-    end
-
-    def last_from_yandex
-      from_author.last
     end
   end
 end

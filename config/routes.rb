@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: "/sidekiq"
   mount Crono::Web, at: "/crono"
 
-  root "articles#actual"
+  root to: "articles#index"
 
-  get "/admin" => "articles#new"
-  post "/admin", to: "articles#create"
-  patch "/admin", to: "articles#create"
+  namespace 'admin' do
+    root to: "articles#new"
+    post "/", to: "articles#update"
+    patch "/", to: "articles#update"
+  end
 end
