@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-  around_action :set_time_zone, only: :create
   def actual
     @article = Article.actual
   end
@@ -12,17 +11,13 @@ class ArticlesController < ApplicationController
     @article = Article.new article_params
 
     if @article.save
-      redirect_to root_path
+      redirect_to admin_path
     else
       render :new
     end
   end
 
   private
-
-  def set_time_zone(&block)
-    Time.use_zone(Time.zone.name, &block)
-  end
 
   def article_params
     params.require(:article).permit(:title, :annotation, :published_to)

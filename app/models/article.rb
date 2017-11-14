@@ -4,7 +4,7 @@ class Article < ApplicationRecord
 
   validates :title, presence: true
   validates :annotation, presence: true
-  validate :check_published_to, on: :create, if: Proc.new { |article| article.published_to }
+  validate :check_published_to, on: :create, if: -> { self.published_to.present? }
 
   after_create_commit :broadcast, if: -> { self == Article.actual }
 
