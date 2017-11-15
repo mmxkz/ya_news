@@ -7,7 +7,7 @@ class YandexNewsParserJob < ApplicationJob
 
   def perform
     last_from_yandex = last_main_yandex_news
-    unless Article.last_from_yandex&.published_at&.utc == last_from_yandex[:published_at]&.to_time.utc
+    unless Article.actual_from_yandex&.published_at&.utc == last_from_yandex[:published_at]&.to_time.utc
       Article.create(last_from_yandex)
     end
   end
