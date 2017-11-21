@@ -1,14 +1,12 @@
 = form_for @article, url: admin_path, html: {class: "ui form"}  do |f|
-  - if @article.errors.any?
+  - if flash[:success].present?
+    .ui.tertiary.inverted.green.segment
+      .item= flash[:success]
+  - if flash[:error].present?
     .ui.tertiary.inverted.red.segment
       .ui.bulleted.list
-        - @article.errors.full_messages.each do |msg|
+        - @article.errors&.full_messages&.each do |msg|
           .item= msg
-
-  - if !flash.empty?
-    .ui.tertiary.inverted.green.segment
-      -flash.each do |key, value|
-        .item= value
   .field
     =f.label :title
     =f.text_field :title

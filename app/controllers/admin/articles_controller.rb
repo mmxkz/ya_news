@@ -6,11 +6,11 @@ module Admin
 
     def update
       if @article.update_attributes(article_params)
-        flash[:success] = "Successful"
-        redirect_to admin_path
+        flash.now[:success] = "Successful"
       else
-        render :new
+        flash.now[:error] = "Failed"
       end
+      render :new
     end
 
     private

@@ -7,7 +7,7 @@ RUN mkdir /ya_news
 WORKDIR /ya_news
 
 CMD tmux new -ds sidekiq "sleep 10 && bundle exec sidekiq -C config/sidekiq.yml" && \
-    tmux new -ds crono "sleep 10 && bundle exec crono" && \
+    tmux new -ds crono "sleep 10 && bundle exec crono -d" && \
     bundle exec rails server -b 0.0.0.0
 
 ADD Gemfile /ya_news/Gemfile
