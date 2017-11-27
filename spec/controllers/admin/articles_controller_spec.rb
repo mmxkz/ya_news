@@ -11,7 +11,6 @@ describe Admin::ArticlesController do
     end
 
     context "when there is actual article" do
-
       let(:actual_article) { FactoryBot.build(:article) }
 
       before(:each) do

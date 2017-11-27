@@ -26,7 +26,7 @@ describe Article do
 
     it "published_to not should be past" do
       future_article.valid?
-      expect(past_article.errors[:published_to].size).to eq 0
+      expect(future_article.errors[:published_to].size).to eq 0
     end
   end
 
@@ -44,15 +44,9 @@ describe Article do
     end
 
     describe ".with_actual_published_to" do
-      let!(:future_author_article) { FactoryBot.create :article, published_to: Time.now + 2.minute }
-
-      before(:each) do
-        travel_to Time.now + 70.seconds
-      end
-
       it "should return only news from author" do
         expect(Article.with_actual_published_to.count).to eq 1
-        expect(Article.with_actual_published_to.last.id).to eq future_author_article.id
+        expect(Article.with_actual_published_to.last.id).to eq author_article.id
       end
     end
   end
