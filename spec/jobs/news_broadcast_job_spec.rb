@@ -6,8 +6,6 @@ describe NewsBroadcastJob do
   let(:key) { 123 }
 
   it 'queues the job' do
-    ActiveJob::Base.queue_adapter = :test
-
     expect { job }.to have_enqueued_job(described_class)
       .with(key)
       .on_queue("broadcast_news")

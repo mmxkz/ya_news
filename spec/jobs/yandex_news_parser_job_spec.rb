@@ -7,8 +7,6 @@ describe YandexNewsParserJob do
 
   describe "queues" do
     it 'queues the job' do
-      ActiveJob::Base.queue_adapter = :test
-
       expect { job }.to have_enqueued_job(described_class)
         .with(key)
         .on_queue("yandex_news")
@@ -17,7 +15,6 @@ describe YandexNewsParserJob do
 
   describe "#perform" do
     before(:each) do
-      ActiveJob::Base.queue_adapter = :test
       stub_const("YandexNewsParserJob::RSS_URL", 'spec/files/yandex_news.rss')
     end
 
